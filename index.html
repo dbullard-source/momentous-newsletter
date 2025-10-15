@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marley's Newsletter CRM - Top Leads Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.1em;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: #718096;
+            font-size: 1em;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        h2 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .lead-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .lead-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .lead-email {
+            font-weight: 600;
+            color: #2d3748;
+            flex-grow: 1;
+        }
+
+        .lead-stats {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .focus-badge {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-top: 20px;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .tier-platinum {
+            background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+            color: #2d3748;
+        }
+
+        .tier-gold {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #2d3748;
+        }
+
+        .tier-silver {
+            background: linear-gradient(135deg, #c0c0c0 0%, #d3d3d3 100%);
+            color: #2d3748;
+        }
+
+        .tier-bronze {
+            background: linear-gradient(135deg, #cd7f32 0%, #e6a864 100%);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .lead-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Marley's Newsletter CRM</h1>
+            <p class="subtitle">Top Leads Dashboard - Momentous Campaign</p>
+            <p class="subtitle" style="font-size: 0.9em; margin-top: 5px;">30-Day Summary (Updated 10.08)</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalLeads">91</div>
+                <div class="stat-label">Total Leads</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="focusLeads">32</div>
+                <div class="stat-label">Focus List Candidates</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalClicks">384</div>
+                <div class="stat-label">Total All-Time Clicks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="avgClicks">4.2</div>
+                <div class="stat-label">Avg Clicks per Lead</div>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="card full-width">
+                <h2>🏆 Top 10 Most Engaged Leads</h2>
+                <div id="topLeads"></div>
+            </div>
+
+            <div class="card">
+                <h2>📈 Engagement Distribution</h2>
+                <div class="chart-container">
+                    <canvas id="engagementChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Focus List vs Others</h2>
+                <div class="chart-container">
+                    <canvas id="focusChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card full-width">
+                <h2>⭐ Focus List Candidates (High-Value Leads)</h2>
+                <div id="focusList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const leadsData = [
+            {email: "rmurphy@nvp.com", clicks: 117, recent: 0, focus: true},
+            {email: "jborden@harvestcapgroup.com", clicks: 19, recent: 0, focus: true},
+            {email: "dgray@seminolecountyfl.gov", clicks: 17, recent: 0, focus: true},
+            {email: "gcunha@doorlandonorth.com", clicks: 15, recent: 0, focus: true},
+            {email: "jgarlington@blharbert.com", clicks: 15, recent: 0, focus: true},
+            {email: "travis.sparks@lbwl.com", clicks: 12, recent: 0, focus: true},
+            {email: "bcain@retailspecialists.com", clicks: 10, recent: 0, focus: true},
+            {email: "glenn@gtsportsventures.com", clicks: 7, recent: 0, focus: true},
+            {email: "jfinger@mcguirewoods.com", clicks: 6, recent: 0, focus: true},
+            {email: "suraj@the4thquarter.co", clicks: 6, recent: 0, focus: true},
+            {email: "humblethyself32@gmail.com", clicks: 5, recent: 0, focus: true},
+            {email: "jmaher@sopriscapital.com", clicks: 5, recent: 0, focus: true},
+            {email: "jpaul@sopriscapital.com", clicks: 5, recent: 0, focus: true},
+            {email: "nick@nessportsandre.com", clicks: 5, recent: 0, focus: true},
+            {email: "parker.tweedley@athletiverse.io", clicks: 5, recent: 0, focus: true},
+            {email: "tpaul@sopriscapital.com", clicks: 5, recent: 0, focus: true},
+            {email: "ab@privateoffice.ventures", clicks: 4, recent: 0, focus: true},
+            {email: "ams@certuscap.com", clicks: 4, recent: 0, focus: true},
+            {email: "bl@cruxfootball.com", clicks: 4, recent: 0, focus: true},
+            {email: "darryl.s.shaw@gmail.com", clicks: 4, recent: 0, focus: true},
+            {email: "forrest@intersection-ventures.com", clicks: 4, recent: 0, focus: true},
+            {email: "kevin.m.huss@gmail.com", clicks: 4, recent: 0, focus: true},
+            {email: "steve@cozineadvisors.com", clicks: 4, recent: 0, focus: true},
+            {email: "tony.allegretti@sportingjax.com", clicks: 4, recent: 0, focus: true},
+            {email: "gennaro@nextcoastsports.com", clicks: 3, recent: 0, focus: true},
+            {email: "jcohn@boynecapital.com", clicks: 3, recent: 0, focus: true},
+            {email: "karen@gtsportsventures.com", clicks: 3, recent: 0, focus: true},
+            {email: "melvin@gamegain.io", clicks: 3, recent: 0, focus: true},
+            {email: "mhughes589@gmail.com", clicks: 3, recent: 0, focus: true},
+            {email: "peter@newmexicoutd.com", clicks: 3, recent: 0, focus: true},
+            {email: "awenig@sabcap.com", clicks: 2, recent: 0, focus: false},
+            {email: "ben@lbkcapllc.com", clicks: 2, recent: 0, focus: false}
+        ];
+
+        function getTier(clicks) {
+            if (clicks >= 10) return {name: 'Platinum', class: 'tier-platinum'};
+            if (clicks >= 5) return {name: 'Gold', class: 'tier-gold'};
+            if (clicks >= 3) return {name: 'Silver', class: 'tier-silver'};
+            return {name: 'Bronze', class: 'tier-bronze'};
+        }
+
+        // Update stats
+        const totalLeads = leadsData.length;
+        const focusLeads = leadsData.filter(l => l.focus).length;
+        const totalClicks = leadsData.reduce((sum, l) => sum + l.clicks, 0);
+        const avgClicks = (totalClicks / totalLeads).toFixed(1);
+
+        document.getElementById('totalLeads').textContent = totalLeads;
+        document.getElementById('focusLeads').textContent = focusLeads;
+        document.getElementById('totalClicks').textContent = totalClicks;
+        document.getElementById('avgClicks').textContent = avgClicks;
+
+        // Top 10 leads
+        const topLeads = [...leadsData].sort((a, b) => b.clicks - a.clicks).slice(0, 10);
+        const topLeadsHtml = topLeads.map((lead, index) => {
+            const tier = getTier(lead.clicks);
+            return `
+                <div class="lead-item">
+                    <span style="font-size: 1.5em; margin-right: 15px;">${index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '⭐'}</span>
+                    <span class="lead-email">${lead.email}</span>
+                    <div class="lead-stats">
+                        <span class="tier-badge ${tier.class}">${tier.name}</span>
+                        <span class="badge">${lead.clicks} clicks</span>
+                        ${lead.focus ? '<span class="focus-badge">FOCUS</span>' : ''}
+                    </div>
+                </div>
+            `;
+        }).join('');
+        document.getElementById('topLeads').innerHTML = topLeadsHtml;
+
+        // Focus list
+        const focusListLeads = leadsData.filter(l => l.focus).sort((a, b) => b.clicks - a.clicks);
+        const focusListHtml = focusListLeads.map(lead => {
+            const tier = getTier(lead.clicks);
+            return `
+                <div class="lead-item">
+                    <span class="lead-email">${lead.email}</span>
+                    <div class="lead-stats">
+                        <span class="tier-badge ${tier.class}">${tier.name}</span>
+                        <span class="badge">${lead.clicks} clicks</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        document.getElementById('focusList').innerHTML = focusListHtml;
+
+        // Engagement distribution chart
+        const engagementRanges = {
+            '10+ clicks': leadsData.filter(l => l.clicks >= 10).length,
+            '5-9 clicks': leadsData.filter(l => l.clicks >= 5 && l.clicks < 10).length,
+            '3-4 clicks': leadsData.filter(l => l.clicks >= 3 && l.clicks < 5).length,
+            '2 clicks': leadsData.filter(l => l.clicks === 2).length,
+            '1 click': leadsData.filter(l => l.clicks === 1).length
+        };
+
+        new Chart(document.getElementById('engagementChart'), {
+            type: 'bar',
+            data: {
+                labels: Object.keys(engagementRanges),
+                datasets: [{
+                    label: 'Number of Leads',
+                    data: Object.values(engagementRanges),
+                    backgroundColor: [
+                        'rgba(102, 126, 234, 0.8)',
+                        'rgba(118, 75, 162, 0.8)',
+                        'rgba(102, 126, 234, 0.6)',
+                        'rgba(118, 75, 162, 0.6)',
+                        'rgba(102, 126, 234, 0.4)'
+                    ],
+                    borderColor: [
+                        'rgba(102, 126, 234, 1)',
+                        'rgba(118, 75, 162, 1)',
+                        'rgba(102, 126, 234, 1)',
+                        'rgba(118, 75, 162, 1)',
+                        'rgba(102, 126, 234, 1)'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 5
+                        }
+                    }
+                }
+            }
+        });
+
+        // Focus vs Others chart
+        const focusCount = leadsData.filter(l => l.focus).length;
+        const nonFocusCount = leadsData.length - focusCount;
+        const focusClicks = leadsData.filter(l => l.focus).reduce((sum, l) => sum + l.clicks, 0);
+        const nonFocusClicks = totalClicks - focusClicks;
+
+        new Chart(document.getElementById('focusChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Focus List', 'Other Leads'],
+                datasets: [{
+                    label: 'Number of Leads',
+                    data: [focusCount, nonFocusCount],
+                    backgroundColor: [
+                        'rgba(245, 87, 108, 0.8)',
+                        'rgba(102, 126, 234, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(245, 87, 108, 1)',
+                        'rgba(102, 126, 234, 1)'
+                    ],
+                    borderWidth: 2
+                }, {
+                    label: 'Total Clicks',
+                    data: [focusClicks, nonFocusClicks],
+                    backgroundColor: [
+                        'rgba(245, 87, 108, 0.5)',
+                        'rgba(102, 126, 234, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(245, 87, 108, 1)',
+                        'rgba(102, 126, 234, 1)'
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const label = context.dataset.label || '';
+                                const value = context.parsed;
+                                const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = ((value / total) * 100).toFixed(1);
+                                return `${label}: ${value} (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
