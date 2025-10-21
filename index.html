@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marley's Newsletter CRM - Top Leads Dashboard</title>
+    <title>Marley's Newsletter CRM - Updated Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -128,29 +128,40 @@
             font-weight: 600;
             color: #2d3748;
             flex-grow: 1;
+            font-size: 0.9em;
         }
 
         .lead-stats {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .badge {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 5px 15px;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.9em;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .recent-badge {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
             font-weight: bold;
         }
 
         .focus-badge {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
-            padding: 5px 15px;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.85em;
+            font-size: 0.8em;
             font-weight: bold;
         }
 
@@ -162,16 +173,16 @@
 
         .tier-badge {
             display: inline-block;
-            padding: 3px 10px;
+            padding: 4px 12px;
             border-radius: 15px;
             font-size: 0.8em;
             font-weight: bold;
-            margin-left: 10px;
         }
 
         .tier-platinum {
-            background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+            background: linear-gradient(135deg, #e8e8e8 0%, #ffffff 100%);
             color: #2d3748;
+            border: 2px solid #c0c0c0;
         }
 
         .tier-gold {
@@ -200,7 +211,12 @@
 
             .lead-stats {
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
+                align-items: flex-end;
+            }
+
+            .lead-email {
+                font-size: 0.85em;
             }
         }
     </style>
@@ -209,37 +225,46 @@
     <div class="container">
         <header>
             <h1>📊 Marley's Newsletter CRM</h1>
-            <p class="subtitle">Top Leads Dashboard - Momentous Campaign</p>
-            <p class="subtitle" style="font-size: 0.9em; margin-top: 5px;">30-Day Summary (Updated 10.08)</p>
+            <p class="subtitle">Updated Lead Analytics Dashboard</p>
+            <p class="subtitle" style="font-size: 0.9em; margin-top: 5px;">Latest Data - Momentous Campaign</p>
         </header>
 
         <div class="stats-grid">
             <div class="stat-card">
-                <div class="stat-number" id="totalLeads">91</div>
+                <div class="stat-number" id="totalLeads">0</div>
                 <div class="stat-label">Total Leads</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="focusLeads">32</div>
+                <div class="stat-number" id="focusLeads">0</div>
                 <div class="stat-label">Focus List Candidates</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="totalClicks">384</div>
+                <div class="stat-number" id="totalClicks">0</div>
                 <div class="stat-label">Total All-Time Clicks</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="avgClicks">4.2</div>
+                <div class="stat-number" id="avgClicks">0</div>
                 <div class="stat-label">Avg Clicks per Lead</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="recentClicks">0</div>
+                <div class="stat-label">Clicks Last 7 Days</div>
             </div>
         </div>
 
         <div class="content-grid">
             <div class="card full-width">
-                <h2>🏆 Top 10 Most Engaged Leads</h2>
+                <h2>🏆 Top 15 Most Engaged Leads (All-Time)</h2>
                 <div id="topLeads"></div>
             </div>
 
+            <div class="card full-width">
+                <h2>🔥 Most Active in Past Week</h2>
+                <div id="recentLeads"></div>
+            </div>
+
             <div class="card">
-                <h2>📈 Engagement Distribution</h2>
+                <h2>📈 All-Time Engagement Distribution</h2>
                 <div class="chart-container">
                     <canvas id="engagementChart"></canvas>
                 </div>
@@ -253,7 +278,7 @@
             </div>
 
             <div class="card full-width">
-                <h2>⭐ Focus List Candidates (High-Value Leads)</h2>
+                <h2>⭐ All Focus List Candidates (High-Value Leads)</h2>
                 <div id="focusList"></div>
             </div>
         </div>
@@ -261,17 +286,27 @@
 
     <script>
         const leadsData = [
-            {email: "rmurphy@nvp.com", clicks: 117, recent: 0, focus: true},
-            {email: "jborden@harvestcapgroup.com", clicks: 19, recent: 0, focus: true},
-            {email: "dgray@seminolecountyfl.gov", clicks: 17, recent: 0, focus: true},
-            {email: "gcunha@doorlandonorth.com", clicks: 15, recent: 0, focus: true},
-            {email: "jgarlington@blharbert.com", clicks: 15, recent: 0, focus: true},
-            {email: "travis.sparks@lbwl.com", clicks: 12, recent: 0, focus: true},
-            {email: "bcain@retailspecialists.com", clicks: 10, recent: 0, focus: true},
+            {email: "rmurphy@nvp.com", clicks: 295, recent: 86, focus: true},
+            {email: "jgarlington@blharbert.com", clicks: 27, recent: 6, focus: true},
+            {email: "jborden@harvestcapgroup.com", clicks: 25, recent: 4, focus: true},
+            {email: "gcunha@doorlandonorth.com", clicks: 23, recent: 6, focus: true},
+            {email: "bcain@retailspecialists.com", clicks: 22, recent: 8, focus: true},
+            {email: "dgray@seminolecountyfl.gov", clicks: 22, recent: 5, focus: true},
+            {email: "travis.sparks@lbwl.com", clicks: 14, recent: 0, focus: true},
+            {email: "mharris@renderotrust.com", clicks: 13, recent: 2, focus: true},
+            {email: "david@westonurban.com", clicks: 10, recent: 0, focus: true},
             {email: "glenn@gtsportsventures.com", clicks: 7, recent: 0, focus: true},
+            {email: "sean@temponovus.com", clicks: 7, recent: 7, focus: true},
+            {email: "adam.zimmerman7@gmail.com", clicks: 6, recent: 0, focus: true},
+            {email: "brett@benevolentcapital.com", clicks: 6, recent: 0, focus: true},
+            {email: "forrest@intersection-ventures.com", clicks: 6, recent: 0, focus: true},
             {email: "jfinger@mcguirewoods.com", clicks: 6, recent: 0, focus: true},
+            {email: "josh.lev@spwm.com", clicks: 6, recent: 2, focus: true},
             {email: "suraj@the4thquarter.co", clicks: 6, recent: 0, focus: true},
+            {email: "trock@sasaki.com", clicks: 6, recent: 0, focus: true},
+            {email: "greg@pantoneim.com", clicks: 5, recent: 0, focus: true},
             {email: "humblethyself32@gmail.com", clicks: 5, recent: 0, focus: true},
+            {email: "jcohn@boynecapital.com", clicks: 5, recent: 0, focus: true},
             {email: "jmaher@sopriscapital.com", clicks: 5, recent: 0, focus: true},
             {email: "jpaul@sopriscapital.com", clicks: 5, recent: 0, focus: true},
             {email: "nick@nessportsandre.com", clicks: 5, recent: 0, focus: true},
@@ -281,55 +316,169 @@
             {email: "ams@certuscap.com", clicks: 4, recent: 0, focus: true},
             {email: "bl@cruxfootball.com", clicks: 4, recent: 0, focus: true},
             {email: "darryl.s.shaw@gmail.com", clicks: 4, recent: 0, focus: true},
-            {email: "forrest@intersection-ventures.com", clicks: 4, recent: 0, focus: true},
+            {email: "hdg@kylemoreholdings.com", clicks: 4, recent: 0, focus: true},
             {email: "kevin.m.huss@gmail.com", clicks: 4, recent: 0, focus: true},
+            {email: "nick@bisonx.org", clicks: 4, recent: 0, focus: true},
+            {email: "patrick.zalupski@dreamfindershomes.com", clicks: 4, recent: 0, focus: true},
+            {email: "roy@temponovus.com", clicks: 4, recent: 4, focus: true},
             {email: "steve@cozineadvisors.com", clicks: 4, recent: 0, focus: true},
             {email: "tony.allegretti@sportingjax.com", clicks: 4, recent: 0, focus: true},
+            {email: "adam@rabover.com", clicks: 3, recent: 0, focus: true},
+            {email: "cjeske@echo.global", clicks: 3, recent: 3, focus: true},
             {email: "gennaro@nextcoastsports.com", clicks: 3, recent: 0, focus: true},
-            {email: "jcohn@boynecapital.com", clicks: 3, recent: 0, focus: true},
             {email: "karen@gtsportsventures.com", clicks: 3, recent: 0, focus: true},
             {email: "melvin@gamegain.io", clicks: 3, recent: 0, focus: true},
             {email: "mhughes589@gmail.com", clicks: 3, recent: 0, focus: true},
+            {email: "mike@arisecp.com", clicks: 3, recent: 2, focus: true},
             {email: "peter@newmexicoutd.com", clicks: 3, recent: 0, focus: true},
+            {email: "adam.zimmerman7@gmail.co", clicks: 2, recent: 0, focus: false},
             {email: "awenig@sabcap.com", clicks: 2, recent: 0, focus: false},
-            {email: "ben@lbkcapllc.com", clicks: 2, recent: 0, focus: false}
+            {email: "ben@lbkcapllc.com", clicks: 2, recent: 0, focus: false},
+            {email: "benjamin.phillips@pimco.com", clicks: 2, recent: 0, focus: false},
+            {email: "chefiksimo@yahoo.com", clicks: 2, recent: 2, focus: false},
+            {email: "chris@innovatiocap.com", clicks: 2, recent: 2, focus: false},
+            {email: "claudiav@magnoliahillpartners.com", clicks: 2, recent: 2, focus: false},
+            {email: "clayton@tebowgroup.com", clicks: 2, recent: 0, focus: false},
+            {email: "connerpopa21@gmail.com", clicks: 2, recent: 0, focus: false},
+            {email: "d.bullard@athletiverse.io", clicks: 2, recent: 2, focus: false},
+            {email: "dabrams@velocitycm.com", clicks: 2, recent: 0, focus: false},
+            {email: "dan@eltoro.com", clicks: 2, recent: 0, focus: false},
+            {email: "david.harrison2@ucf.edu", clicks: 2, recent: 0, focus: false},
+            {email: "david.lawrence@hines.com", clicks: 2, recent: 0, focus: false},
+            {email: "digitalsquarevc@gmail.com", clicks: 2, recent: 0, focus: false},
+            {email: "joshuaglueck@centrebackpartners.com", clicks: 2, recent: 0, focus: false},
+            {email: "keal.blache@vivenu.com", clicks: 2, recent: 0, focus: false},
+            {email: "larry.botel@jrpllc.com", clicks: 2, recent: 0, focus: false},
+            {email: "ljs120@georgetown.edu", clicks: 2, recent: 2, focus: false},
+            {email: "mfurey5@gmail.com", clicks: 2, recent: 0, focus: false},
+            {email: "mhughes@magnoliahillpartners.com", clicks: 2, recent: 2, focus: false},
+            {email: "mirajlee@gmail.com", clicks: 2, recent: 0, focus: false},
+            {email: "mmcnaughton@m2rea.com", clicks: 2, recent: 0, focus: false},
+            {email: "nnarasimhan162@gmail.com", clicks: 2, recent: 0, focus: false},
+            {email: "oliver@aureliencapitalpartners.com", clicks: 2, recent: 0, focus: false},
+            {email: "pasha@aera.inc", clicks: 2, recent: 0, focus: false},
+            {email: "paul@thompsonfamilyoffice.com", clicks: 2, recent: 0, focus: false},
+            {email: "qcampbell@longridgepartners.ca", clicks: 2, recent: 0, focus: false},
+            {email: "randy@westonurban.com", clicks: 2, recent: 0, focus: false},
+            {email: "redstonerentalhomes@gmail.com", clicks: 2, recent: 0, focus: false},
+            {email: "richard.brick@true.global", clicks: 2, recent: 0, focus: false},
+            {email: "ron.mattson@honeywell.com", clicks: 2, recent: 0, focus: false},
+            {email: "samuelberen@gmail.com", clicks: 2, recent: 0, focus: false},
+            {email: "scott.v.donnelly@gmail.com", clicks: 2, recent: 0, focus: false},
+            {email: "sean@cliffordcapital.io", clicks: 2, recent: 0, focus: false},
+            {email: "sf@binnacle-group.com", clicks: 2, recent: 0, focus: false},
+            {email: "srosen@resiliencecapital.com", clicks: 2, recent: 0, focus: false},
+            {email: "staff@sportingjax.com", clicks: 2, recent: 0, focus: false},
+            {email: "stephen@sccapitalllc.com", clicks: 2, recent: 0, focus: false},
+            {email: "tatz@roaringbrookholdings.com", clicks: 2, recent: 0, focus: false},
+            {email: "tkeyes@keyescap.com", clicks: 2, recent: 0, focus: false},
+            {email: "tommy@prosperityventurepartners.com", clicks: 2, recent: 0, focus: false},
+            {email: "wylie.nelson@h5datacenters.com", clicks: 2, recent: 2, focus: false},
+            {email: "atrick.zalupski@dreamfindershomes.com", clicks: 1, recent: 0, focus: false},
+            {email: "bobbyhenebry@gmail.com", clicks: 1, recent: 0, focus: false},
+            {email: "charles33harris@gmail.com", clicks: 1, recent: 0, focus: false},
+            {email: "darryl.shaw@tampabaysunfc.com", clicks: 1, recent: 0, focus: false},
+            {email: "e24schwartz@gmail.com", clicks: 1, recent: 0, focus: false},
+            {email: "emaury@atriumcg.com", clicks: 1, recent: 0, focus: false},
+            {email: "fatima@hdventuresllc.com", clicks: 1, recent: 0, focus: false},
+            {email: "gsmiley@geraldsmiley.com", clicks: 1, recent: 0, focus: false},
+            {email: "ian.gensler@sagespring.com", clicks: 1, recent: 0, focus: false},
+            {email: "ivernonscott26@yahoo.com", clicks: 1, recent: 0, focus: false},
+            {email: "jacqueline.leigh.grant@gmail.com", clicks: 1, recent: 0, focus: false},
+            {email: "jaimemolinaosorio@gmail.com", clicks: 1, recent: 0, focus: false},
+            {email: "jake@stormlightventures.com", clicks: 1, recent: 1, focus: false},
+            {email: "jon@voigtman.com", clicks: 1, recent: 0, focus: false},
+            {email: "jshields@creasote.com", clicks: 1, recent: 0, focus: false},
+            {email: "jwarner@epogeecapital.com", clicks: 1, recent: 0, focus: false},
+            {email: "jwarner@equilibria.capital", clicks: 1, recent: 0, focus: false},
+            {email: "ken@ffsportsgroup.com", clicks: 1, recent: 1, focus: false},
+            {email: "m.hughes@email.com", clicks: 1, recent: 0, focus: false},
+            {email: "malcolm@vettedsports.com", clicks: 1, recent: 0, focus: false},
+            {email: "max@bouventures.com", clicks: 1, recent: 0, focus: false},
+            {email: "meganlynnmcnulty@gmail.com", clicks: 1, recent: 0, focus: false},
+            {email: "mgravely2004@gmail.com", clicks: 1, recent: 0, focus: false},
+            {email: "micah@rimrockcompanies.com", clicks: 1, recent: 0, focus: false},
+            {email: "michael@prometheusalts.com", clicks: 1, recent: 0, focus: false},
+            {email: "mm@privateoffice.ventures", clicks: 1, recent: 0, focus: false},
+            {email: "mshah@gtsportsventures.com", clicks: 1, recent: 0, focus: false},
+            {email: "mwaldrip@dauntlesscapital.com", clicks: 1, recent: 0, focus: false},
+            {email: "olliecantrill@insighteleven.co.uk", clicks: 1, recent: 0, focus: false},
+            {email: "pablo@turningpointusa.org", clicks: 1, recent: 0, focus: false},
+            {email: "r.salvatore.93@charlestonbattery.com", clicks: 1, recent: 0, focus: false},
+            {email: "sam@northcapital.com", clicks: 1, recent: 0, focus: false},
+            {email: "scott.sams3@gmail.com", clicks: 1, recent: 0, focus: false},
+            {email: "sfriedman@hitequity.com", clicks: 1, recent: 0, focus: false},
+            {email: "smclaughlin@drivencapital.com", clicks: 1, recent: 0, focus: false},
+            {email: "spencerkaplan7@gmail.com", clicks: 1, recent: 0, focus: false},
+            {email: "sswierczewski@yahoo.com", clicks: 1, recent: 0, focus: false},
+            {email: "syoung@fccincinnati.com", clicks: 1, recent: 0, focus: false},
+            {email: "traci@nancyliebermancharities.org", clicks: 1, recent: 0, focus: false}
         ];
 
         function getTier(clicks) {
-            if (clicks >= 10) return {name: 'Platinum', class: 'tier-platinum'};
-            if (clicks >= 5) return {name: 'Gold', class: 'tier-gold'};
-            if (clicks >= 3) return {name: 'Silver', class: 'tier-silver'};
+            if (clicks >= 20) return {name: 'Platinum', class: 'tier-platinum'};
+            if (clicks >= 10) return {name: 'Gold', class: 'tier-gold'};
+            if (clicks >= 5) return {name: 'Silver', class: 'tier-silver'};
             return {name: 'Bronze', class: 'tier-bronze'};
         }
 
-        // Update stats
+        // Calculate stats
         const totalLeads = leadsData.length;
         const focusLeads = leadsData.filter(l => l.focus).length;
         const totalClicks = leadsData.reduce((sum, l) => sum + l.clicks, 0);
+        const recentClicks = leadsData.reduce((sum, l) => sum + l.recent, 0);
         const avgClicks = (totalClicks / totalLeads).toFixed(1);
 
         document.getElementById('totalLeads').textContent = totalLeads;
         document.getElementById('focusLeads').textContent = focusLeads;
-        document.getElementById('totalClicks').textContent = totalClicks;
+        document.getElementById('totalClicks').textContent = totalClicks.toLocaleString();
         document.getElementById('avgClicks').textContent = avgClicks;
+        document.getElementById('recentClicks').textContent = recentClicks;
 
-        // Top 10 leads
-        const topLeads = [...leadsData].sort((a, b) => b.clicks - a.clicks).slice(0, 10);
+        // Top 15 all-time leads
+        const topLeads = [...leadsData].sort((a, b) => b.clicks - a.clicks).slice(0, 15);
         const topLeadsHtml = topLeads.map((lead, index) => {
             const tier = getTier(lead.clicks);
+            const emoji = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '⭐';
             return `
                 <div class="lead-item">
-                    <span style="font-size: 1.5em; margin-right: 15px;">${index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '⭐'}</span>
+                    <span style="font-size: 1.5em; margin-right: 15px;">${emoji}</span>
                     <span class="lead-email">${lead.email}</span>
                     <div class="lead-stats">
                         <span class="tier-badge ${tier.class}">${tier.name}</span>
-                        <span class="badge">${lead.clicks} clicks</span>
+                        <span class="badge">${lead.clicks} total</span>
+                        ${lead.recent > 0 ? `<span class="recent-badge">${lead.recent} recent</span>` : ''}
                         ${lead.focus ? '<span class="focus-badge">FOCUS</span>' : ''}
                     </div>
                 </div>
             `;
         }).join('');
         document.getElementById('topLeads').innerHTML = topLeadsHtml;
+
+        // Most active in past week
+        const recentActiveLeads = [...leadsData]
+            .filter(l => l.recent > 0)
+            .sort((a, b) => b.recent - a.recent)
+            .slice(0, 10);
+        
+        const recentLeadsHtml = recentActiveLeads.length > 0 
+            ? recentActiveLeads.map(lead => {
+                const tier = getTier(lead.clicks);
+                return `
+                    <div class="lead-item">
+                        <span style="font-size: 1.3em; margin-right: 12px;">🔥</span>
+                        <span class="lead-email">${lead.email}</span>
+                        <div class="lead-stats">
+                            <span class="tier-badge ${tier.class}">${tier.name}</span>
+                            <span class="recent-badge">${lead.recent} this week</span>
+                            <span class="badge">${lead.clicks} total</span>
+                            ${lead.focus ? '<span class="focus-badge">FOCUS</span>' : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('')
+            : '<p style="color: #718096; text-align: center; padding: 20px;">No activity in the past 7 days</p>';
+        document.getElementById('recentLeads').innerHTML = recentLeadsHtml;
 
         // Focus list
         const focusListLeads = leadsData.filter(l => l.focus).sort((a, b) => b.clicks - a.clicks);
@@ -340,7 +489,8 @@
                     <span class="lead-email">${lead.email}</span>
                     <div class="lead-stats">
                         <span class="tier-badge ${tier.class}">${tier.name}</span>
-                        <span class="badge">${lead.clicks} clicks</span>
+                        <span class="badge">${lead.clicks} total</span>
+                        ${lead.recent > 0 ? `<span class="recent-badge">${lead.recent} recent</span>` : ''}
                     </div>
                 </div>
             `;
@@ -349,11 +499,11 @@
 
         // Engagement distribution chart
         const engagementRanges = {
-            '10+ clicks': leadsData.filter(l => l.clicks >= 10).length,
+            '20+ clicks': leadsData.filter(l => l.clicks >= 20).length,
+            '10-19 clicks': leadsData.filter(l => l.clicks >= 10 && l.clicks < 20).length,
             '5-9 clicks': leadsData.filter(l => l.clicks >= 5 && l.clicks < 10).length,
             '3-4 clicks': leadsData.filter(l => l.clicks >= 3 && l.clicks < 5).length,
-            '2 clicks': leadsData.filter(l => l.clicks === 2).length,
-            '1 click': leadsData.filter(l => l.clicks === 1).length
+            '1-2 clicks': leadsData.filter(l => l.clicks >= 1 && l.clicks < 3).length
         };
 
         new Chart(document.getElementById('engagementChart'), {
@@ -364,11 +514,11 @@
                     label: 'Number of Leads',
                     data: Object.values(engagementRanges),
                     backgroundColor: [
-                        'rgba(102, 126, 234, 0.8)',
+                        'rgba(102, 126, 234, 0.9)',
                         'rgba(118, 75, 162, 0.8)',
-                        'rgba(102, 126, 234, 0.6)',
+                        'rgba(102, 126, 234, 0.7)',
                         'rgba(118, 75, 162, 0.6)',
-                        'rgba(102, 126, 234, 0.4)'
+                        'rgba(102, 126, 234, 0.5)'
                     ],
                     borderColor: [
                         'rgba(102, 126, 234, 1)',
@@ -393,7 +543,7 @@
                     y: {
                         beginAtZero: true,
                         ticks: {
-                            stepSize: 5
+                            stepSize: 10
                         }
                     }
                 }
@@ -403,8 +553,8 @@
         // Focus vs Others chart
         const focusCount = leadsData.filter(l => l.focus).length;
         const nonFocusCount = leadsData.length - focusCount;
-        const focusClicks = leadsData.filter(l => l.focus).reduce((sum, l) => sum + l.clicks, 0);
-        const nonFocusClicks = totalClicks - focusClicks;
+        const focusClicksTotal = leadsData.filter(l => l.focus).reduce((sum, l) => sum + l.clicks, 0);
+        const nonFocusClicksTotal = totalClicks - focusClicksTotal;
 
         new Chart(document.getElementById('focusChart'), {
             type: 'doughnut',
@@ -424,7 +574,7 @@
                     borderWidth: 2
                 }, {
                     label: 'Total Clicks',
-                    data: [focusClicks, nonFocusClicks],
+                    data: [focusClicksTotal, nonFocusClicksTotal],
                     backgroundColor: [
                         'rgba(245, 87, 108, 0.5)',
                         'rgba(102, 126, 234, 0.5)'
