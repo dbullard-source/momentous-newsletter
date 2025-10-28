@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marley's Newsletter CRM - Updated Dashboard</title>
+    <title>Marley's Newsletter CRM - October 2025</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -226,7 +226,7 @@
         <header>
             <h1>📊 Marley's Newsletter CRM</h1>
             <p class="subtitle">Updated Lead Analytics Dashboard</p>
-            <p class="subtitle" style="font-size: 0.9em; margin-top: 5px;">Latest Data - Momentous Campaign</p>
+            <p class="subtitle" style="font-size: 0.9em; margin-top: 5px;">October 28, 2025 - Momentous Campaign</p>
         </header>
 
         <div class="stats-grid">
@@ -286,29 +286,32 @@
 
     <script>
         const leadsData = [
-            {email: "rmurphy@nvp.com", clicks: 295, recent: 86, focus: true},
-            {email: "jgarlington@blharbert.com", clicks: 27, recent: 6, focus: true},
-            {email: "jborden@harvestcapgroup.com", clicks: 25, recent: 4, focus: true},
-            {email: "gcunha@doorlandonorth.com", clicks: 23, recent: 6, focus: true},
-            {email: "bcain@retailspecialists.com", clicks: 22, recent: 8, focus: true},
-            {email: "dgray@seminolecountyfl.gov", clicks: 22, recent: 5, focus: true},
+            {email: "rmurphy@nvp.com", clicks: 353, recent: 58, focus: true},
+            {email: "jgarlington@blharbert.com", clicks: 27, recent: 0, focus: true},
+            {email: "jborden@harvestcapgroup.com", clicks: 25, recent: 0, focus: true},
+            {email: "bcain@retailspecialists.com", clicks: 23, recent: 1, focus: true},
+            {email: "gcunha@doorlandonorth.com", clicks: 23, recent: 0, focus: true},
+            {email: "dgray@seminolecountyfl.gov", clicks: 22, recent: 0, focus: true},
+            {email: "mharris@renderotrust.com", clicks: 17, recent: 4, focus: true},
             {email: "travis.sparks@lbwl.com", clicks: 14, recent: 0, focus: true},
-            {email: "mharris@renderotrust.com", clicks: 13, recent: 2, focus: true},
             {email: "david@westonurban.com", clicks: 10, recent: 0, focus: true},
+            {email: "steve@cozineadvisors.com", clicks: 8, recent: 4, focus: true},
+            {email: "forrest@intersection-ventures.com", clicks: 7, recent: 1, focus: true},
             {email: "glenn@gtsportsventures.com", clicks: 7, recent: 0, focus: true},
-            {email: "sean@temponovus.com", clicks: 7, recent: 7, focus: true},
+            {email: "sean@temponovus.com", clicks: 7, recent: 0, focus: true},
             {email: "adam.zimmerman7@gmail.com", clicks: 6, recent: 0, focus: true},
             {email: "brett@benevolentcapital.com", clicks: 6, recent: 0, focus: true},
-            {email: "forrest@intersection-ventures.com", clicks: 6, recent: 0, focus: true},
             {email: "jfinger@mcguirewoods.com", clicks: 6, recent: 0, focus: true},
-            {email: "josh.lev@spwm.com", clicks: 6, recent: 2, focus: true},
+            {email: "josh.lev@spwm.com", clicks: 6, recent: 0, focus: true},
             {email: "suraj@the4thquarter.co", clicks: 6, recent: 0, focus: true},
+            {email: "toddcromartie@icloud.com", clicks: 6, recent: 6, focus: true},
             {email: "trock@sasaki.com", clicks: 6, recent: 0, focus: true},
             {email: "greg@pantoneim.com", clicks: 5, recent: 0, focus: true},
             {email: "humblethyself32@gmail.com", clicks: 5, recent: 0, focus: true},
             {email: "jcohn@boynecapital.com", clicks: 5, recent: 0, focus: true},
             {email: "jmaher@sopriscapital.com", clicks: 5, recent: 0, focus: true},
             {email: "jpaul@sopriscapital.com", clicks: 5, recent: 0, focus: true},
+            {email: "mike@arisecp.com", clicks: 5, recent: 2, focus: true},
             {email: "nick@nessportsandre.com", clicks: 5, recent: 0, focus: true},
             {email: "parker.tweedley@athletiverse.io", clicks: 5, recent: 0, focus: true},
             {email: "tpaul@sopriscapital.com", clicks: 5, recent: 0, focus: true},
@@ -319,42 +322,46 @@
             {email: "hdg@kylemoreholdings.com", clicks: 4, recent: 0, focus: true},
             {email: "kevin.m.huss@gmail.com", clicks: 4, recent: 0, focus: true},
             {email: "nick@bisonx.org", clicks: 4, recent: 0, focus: true},
+            {email: "nnarasimhan162@gmail.com", clicks: 4, recent: 2, focus: true},
             {email: "patrick.zalupski@dreamfindershomes.com", clicks: 4, recent: 0, focus: true},
-            {email: "roy@temponovus.com", clicks: 4, recent: 4, focus: true},
-            {email: "steve@cozineadvisors.com", clicks: 4, recent: 0, focus: true},
+            {email: "roy@temponovus.com", clicks: 4, recent: 0, focus: true},
             {email: "tony.allegretti@sportingjax.com", clicks: 4, recent: 0, focus: true},
             {email: "adam@rabover.com", clicks: 3, recent: 0, focus: true},
-            {email: "cjeske@echo.global", clicks: 3, recent: 3, focus: true},
+            {email: "chris@innovatiocap.com", clicks: 3, recent: 1, focus: true},
+            {email: "cjeske@echo.global", clicks: 3, recent: 0, focus: true},
+            {email: "claudiav@magnoliahillpartners.com", clicks: 3, recent: 1, focus: true},
             {email: "gennaro@nextcoastsports.com", clicks: 3, recent: 0, focus: true},
             {email: "karen@gtsportsventures.com", clicks: 3, recent: 0, focus: true},
+            {email: "ljs120@georgetown.edu", clicks: 3, recent: 1, focus: true},
             {email: "melvin@gamegain.io", clicks: 3, recent: 0, focus: true},
             {email: "mhughes589@gmail.com", clicks: 3, recent: 0, focus: true},
-            {email: "mike@arisecp.com", clicks: 3, recent: 2, focus: true},
             {email: "peter@newmexicoutd.com", clicks: 3, recent: 0, focus: true},
+            {email: "samuelberen@gmail.com", clicks: 3, recent: 1, focus: true},
             {email: "adam.zimmerman7@gmail.co", clicks: 2, recent: 0, focus: false},
             {email: "awenig@sabcap.com", clicks: 2, recent: 0, focus: false},
             {email: "ben@lbkcapllc.com", clicks: 2, recent: 0, focus: false},
             {email: "benjamin.phillips@pimco.com", clicks: 2, recent: 0, focus: false},
-            {email: "chefiksimo@yahoo.com", clicks: 2, recent: 2, focus: false},
-            {email: "chris@innovatiocap.com", clicks: 2, recent: 2, focus: false},
-            {email: "claudiav@magnoliahillpartners.com", clicks: 2, recent: 2, focus: false},
+            {email: "cburtner@mcrtrust.com", clicks: 2, recent: 2, focus: false},
+            {email: "chefiksimo@yahoo.com", clicks: 2, recent: 0, focus: false},
             {email: "clayton@tebowgroup.com", clicks: 2, recent: 0, focus: false},
             {email: "connerpopa21@gmail.com", clicks: 2, recent: 0, focus: false},
-            {email: "d.bullard@athletiverse.io", clicks: 2, recent: 2, focus: false},
+            {email: "d.bullard@athletiverse.io", clicks: 2, recent: 0, focus: false},
             {email: "dabrams@velocitycm.com", clicks: 2, recent: 0, focus: false},
             {email: "dan@eltoro.com", clicks: 2, recent: 0, focus: false},
             {email: "david.harrison2@ucf.edu", clicks: 2, recent: 0, focus: false},
             {email: "david.lawrence@hines.com", clicks: 2, recent: 0, focus: false},
+            {email: "dbelfer@belfermgmt.com", clicks: 2, recent: 2, focus: false},
             {email: "digitalsquarevc@gmail.com", clicks: 2, recent: 0, focus: false},
+            {email: "jaimemolinaosorio@gmail.com", clicks: 2, recent: 1, focus: false},
+            {email: "jake@stormlightventures.com", clicks: 2, recent: 1, focus: false},
             {email: "joshuaglueck@centrebackpartners.com", clicks: 2, recent: 0, focus: false},
             {email: "keal.blache@vivenu.com", clicks: 2, recent: 0, focus: false},
+            {email: "ken@ffsportsgroup.com", clicks: 2, recent: 1, focus: false},
             {email: "larry.botel@jrpllc.com", clicks: 2, recent: 0, focus: false},
-            {email: "ljs120@georgetown.edu", clicks: 2, recent: 2, focus: false},
             {email: "mfurey5@gmail.com", clicks: 2, recent: 0, focus: false},
-            {email: "mhughes@magnoliahillpartners.com", clicks: 2, recent: 2, focus: false},
+            {email: "mhughes@magnoliahillpartners.com", clicks: 2, recent: 0, focus: false},
             {email: "mirajlee@gmail.com", clicks: 2, recent: 0, focus: false},
             {email: "mmcnaughton@m2rea.com", clicks: 2, recent: 0, focus: false},
-            {email: "nnarasimhan162@gmail.com", clicks: 2, recent: 0, focus: false},
             {email: "oliver@aureliencapitalpartners.com", clicks: 2, recent: 0, focus: false},
             {email: "pasha@aera.inc", clicks: 2, recent: 0, focus: false},
             {email: "paul@thompsonfamilyoffice.com", clicks: 2, recent: 0, focus: false},
@@ -362,8 +369,8 @@
             {email: "randy@westonurban.com", clicks: 2, recent: 0, focus: false},
             {email: "redstonerentalhomes@gmail.com", clicks: 2, recent: 0, focus: false},
             {email: "richard.brick@true.global", clicks: 2, recent: 0, focus: false},
+            {email: "rogerloughney@hotmail.com", clicks: 2, recent: 2, focus: false},
             {email: "ron.mattson@honeywell.com", clicks: 2, recent: 0, focus: false},
-            {email: "samuelberen@gmail.com", clicks: 2, recent: 0, focus: false},
             {email: "scott.v.donnelly@gmail.com", clicks: 2, recent: 0, focus: false},
             {email: "sean@cliffordcapital.io", clicks: 2, recent: 0, focus: false},
             {email: "sf@binnacle-group.com", clicks: 2, recent: 0, focus: false},
@@ -373,27 +380,30 @@
             {email: "tatz@roaringbrookholdings.com", clicks: 2, recent: 0, focus: false},
             {email: "tkeyes@keyescap.com", clicks: 2, recent: 0, focus: false},
             {email: "tommy@prosperityventurepartners.com", clicks: 2, recent: 0, focus: false},
-            {email: "wylie.nelson@h5datacenters.com", clicks: 2, recent: 2, focus: false},
+            {email: "wadams@oakviewgroup.com", clicks: 2, recent: 2, focus: false},
+            {email: "wylie.nelson@h5datacenters.com", clicks: 2, recent: 0, focus: false},
+            {email: "afontein@mcguirewoods.com", clicks: 1, recent: 1, focus: false},
             {email: "atrick.zalupski@dreamfindershomes.com", clicks: 1, recent: 0, focus: false},
+            {email: "bob@mudd.life", clicks: 1, recent: 1, focus: false},
             {email: "bobbyhenebry@gmail.com", clicks: 1, recent: 0, focus: false},
             {email: "charles33harris@gmail.com", clicks: 1, recent: 0, focus: false},
             {email: "darryl.shaw@tampabaysunfc.com", clicks: 1, recent: 0, focus: false},
+            {email: "daufhauser@gmail.com", clicks: 1, recent: 1, focus: false},
             {email: "e24schwartz@gmail.com", clicks: 1, recent: 0, focus: false},
+            {email: "elewis@longridgepartners.ca", clicks: 1, recent: 1, focus: false},
             {email: "emaury@atriumcg.com", clicks: 1, recent: 0, focus: false},
             {email: "fatima@hdventuresllc.com", clicks: 1, recent: 0, focus: false},
             {email: "gsmiley@geraldsmiley.com", clicks: 1, recent: 0, focus: false},
             {email: "ian.gensler@sagespring.com", clicks: 1, recent: 0, focus: false},
             {email: "ivernonscott26@yahoo.com", clicks: 1, recent: 0, focus: false},
             {email: "jacqueline.leigh.grant@gmail.com", clicks: 1, recent: 0, focus: false},
-            {email: "jaimemolinaosorio@gmail.com", clicks: 1, recent: 0, focus: false},
-            {email: "jake@stormlightventures.com", clicks: 1, recent: 1, focus: false},
             {email: "jon@voigtman.com", clicks: 1, recent: 0, focus: false},
             {email: "jshields@creasote.com", clicks: 1, recent: 0, focus: false},
             {email: "jwarner@epogeecapital.com", clicks: 1, recent: 0, focus: false},
             {email: "jwarner@equilibria.capital", clicks: 1, recent: 0, focus: false},
-            {email: "ken@ffsportsgroup.com", clicks: 1, recent: 1, focus: false},
             {email: "m.hughes@email.com", clicks: 1, recent: 0, focus: false},
             {email: "malcolm@vettedsports.com", clicks: 1, recent: 0, focus: false},
+            {email: "matt@pantoneim.com", clicks: 1, recent: 1, focus: false},
             {email: "max@bouventures.com", clicks: 1, recent: 0, focus: false},
             {email: "meganlynnmcnulty@gmail.com", clicks: 1, recent: 0, focus: false},
             {email: "mgravely2004@gmail.com", clicks: 1, recent: 0, focus: false},
@@ -402,10 +412,14 @@
             {email: "mm@privateoffice.ventures", clicks: 1, recent: 0, focus: false},
             {email: "mshah@gtsportsventures.com", clicks: 1, recent: 0, focus: false},
             {email: "mwaldrip@dauntlesscapital.com", clicks: 1, recent: 0, focus: false},
+            {email: "nick@nocapsports.io", clicks: 1, recent: 1, focus: false},
             {email: "olliecantrill@insighteleven.co.uk", clicks: 1, recent: 0, focus: false},
             {email: "pablo@turningpointusa.org", clicks: 1, recent: 0, focus: false},
+            {email: "r.paul.sabin@gmail.com", clicks: 1, recent: 1, focus: false},
             {email: "r.salvatore.93@charlestonbattery.com", clicks: 1, recent: 0, focus: false},
+            {email: "sales@prosportcourt.com", clicks: 1, recent: 1, focus: false},
             {email: "sam@northcapital.com", clicks: 1, recent: 0, focus: false},
+            {email: "samir@magnoliahillpartners.com", clicks: 1, recent: 1, focus: false},
             {email: "scott.sams3@gmail.com", clicks: 1, recent: 0, focus: false},
             {email: "sfriedman@hitequity.com", clicks: 1, recent: 0, focus: false},
             {email: "smclaughlin@drivencapital.com", clicks: 1, recent: 0, focus: false},
@@ -422,7 +436,6 @@
             return {name: 'Bronze', class: 'tier-bronze'};
         }
 
-        // Calculate stats
         const totalLeads = leadsData.length;
         const focusLeads = leadsData.filter(l => l.focus).length;
         const totalClicks = leadsData.reduce((sum, l) => sum + l.clicks, 0);
@@ -435,7 +448,6 @@
         document.getElementById('avgClicks').textContent = avgClicks;
         document.getElementById('recentClicks').textContent = recentClicks;
 
-        // Top 15 all-time leads
         const topLeads = [...leadsData].sort((a, b) => b.clicks - a.clicks).slice(0, 15);
         const topLeadsHtml = topLeads.map((lead, index) => {
             const tier = getTier(lead.clicks);
@@ -455,7 +467,6 @@
         }).join('');
         document.getElementById('topLeads').innerHTML = topLeadsHtml;
 
-        // Most active in past week
         const recentActiveLeads = [...leadsData]
             .filter(l => l.recent > 0)
             .sort((a, b) => b.recent - a.recent)
@@ -480,7 +491,6 @@
             : '<p style="color: #718096; text-align: center; padding: 20px;">No activity in the past 7 days</p>';
         document.getElementById('recentLeads').innerHTML = recentLeadsHtml;
 
-        // Focus list
         const focusListLeads = leadsData.filter(l => l.focus).sort((a, b) => b.clicks - a.clicks);
         const focusListHtml = focusListLeads.map(lead => {
             const tier = getTier(lead.clicks);
@@ -497,7 +507,6 @@
         }).join('');
         document.getElementById('focusList').innerHTML = focusListHtml;
 
-        // Engagement distribution chart
         const engagementRanges = {
             '20+ clicks': leadsData.filter(l => l.clicks >= 20).length,
             '10-19 clicks': leadsData.filter(l => l.clicks >= 10 && l.clicks < 20).length,
@@ -550,7 +559,6 @@
             }
         });
 
-        // Focus vs Others chart
         const focusCount = leadsData.filter(l => l.focus).length;
         const nonFocusCount = leadsData.length - focusCount;
         const focusClicksTotal = leadsData.filter(l => l.focus).reduce((sum, l) => sum + l.clicks, 0);
